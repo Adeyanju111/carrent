@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>EliteRent Florida | Premium Car Rental</title>
+  <meta name="description" content="Luxury car rental in Florida – Miami, Orlando, Tampa & beyond.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #ffffff;
+      color: #1a1e2b;
+      scroll-behavior: smooth;
+    }
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1e40af;
+      --accent: #f97316;
+      --gray-light: #f8fafc;
+      --gray-border: #e2e8f0;
+      --shadow-sm: 0 10px 25px -5px rgba(0,0,0,0.05);
+      --shadow-md: 0 20px 25px -5px rgba(0,0,0,0.05);
+      --shadow-hover: 0 25px 30px -12px rgba(0,0,0,0.15);
+    }
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      padding: 20px 0;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(4px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid var(--gray-border);
+    }
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .nav-links a {
+      text-decoration: none;
+      font-weight: 600;
+      color: #1e293b;
+      transition: 0.2s;
+    }
+    .nav-links a:hover { color: var(--primary); }
+    .btn-outline {
+      border: 2px solid var(--primary);
+      background: transparent;
+      padding: 8px 20px;
+      border-radius: 40px;
+      font-weight: 600;
+      color: var(--primary);
+      cursor: pointer;
+    }
+    .btn-outline:hover { background: var(--primary); color: white; }
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+      padding: 12px 28px;
+      border-radius: 40px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      transition: 0.25s ease;
+      display: inline-block;
+      text-decoration: none;
+      text-align: center;
+    }
+    .btn-primary:hover { background: var(--primary-dark); transform: translateY(-2px); }
+    .btn-primary:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none;
+    }
+    .hero {
+      background: linear-gradient(107deg, rgba(0,0,0,0.7), rgba(0,0,0,0.45)), url('https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80') center/cover no-repeat;
+      min-height: 85vh;
+      display: flex;
+      align-items: center;
+      border-radius: 0 0 40px 40px;
+      margin-bottom: 40px;
+    }
+    .hero-content {
+      max-width: 650px;
+      color: white;
+    }
+    .hero-content h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+    .hero-content p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+    }
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      text-align: center;
+      margin-bottom: 3rem;
+      background: linear-gradient(135deg, #1e293b, var(--primary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .cars-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin: 2rem 0 3rem;
+    }
+    .car-card {
+      background: white;
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.3s;
+      border: 1px solid var(--gray-border);
+    }
+    .car-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-hover); }
+    .car-img {
+      height: 200px;
+      overflow: hidden;
+      background: #f1f5f9;
+    }
+    .car-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s;
+    }
+    .car-card:hover .car-img img { transform: scale(1.05); }
+    .car-info { padding: 1.5rem; }
+    .car-info h3 { font-size: 1.6rem; font-weight: 700; }
+    .price {
+      color: var(--primary);
+      font-weight: 800;
+      font-size: 1.4rem;
+      margin: 10px 0;
+    }
+    .price span { font-size: 0.9rem; font-weight: 400; color: #475569; }
+    .car-features {
+      display: flex;
+      gap: 1rem;
+      margin: 15px 0;
+      color: #334155;
+      font-size: 0.9rem;
+      flex-wrap: wrap;
+    }
+    .rent-btn-card {
+      width: 100%;
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 40px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .rent-btn-card:hover { background: var(--primary-dark); }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+    .feature-item {
+      text-align: center;
+      padding: 1.8rem;
+      background: var(--gray-light);
+      border-radius: 32px;
+    }
+    .feature-item i { font-size: 2.5rem; color: var(--primary); margin-bottom: 1rem; }
+    .feature-item h4 { font-size: 1.4rem; margin-bottom: 0.5rem; }
+    .booking-section {
+      background: linear-gradient(120deg, #f1f5f9 0%, #ffffff 100%);
+      border-radius: 48px;
+      padding: 2.5rem;
+      margin: 3rem 0;
+      box-shadow: var(--shadow-md);
+      border: 1px solid rgba(37,99,235,0.2);
+    }
+    .form-group { margin-bottom: 1.5rem; }
+    .form-group label {
+      font-weight: 600;
+      display: block;
+      margin-bottom: 0.5rem;
+      color: #0f172a;
+    }
+    .form-group input, .form-group select {
+      width: 100%;
+      padding: 14px 18px;
+      border-radius: 28px;
+      border: 1px solid var(--gray-border);
+      font-size: 1rem;
+      transition: 0.2s;
+      background: white;
+    }
+    .form-group input:focus, .form-group select:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(37,99,235,0.2);
+    }
+    .price-preview {
+      background: #eef2ff;
+      padding: 1rem 1.5rem;
+      border-radius: 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      margin: 1rem 0;
+    }
+    .total-price { font-size: 1.8rem; font-weight: 800; color: var(--primary); }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+    .testimonial {
+      background: white;
+      padding: 2rem;
+      border-radius: 32px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--gray-border);
+    }
+    .testimonial i { color: var(--accent); font-size: 1.6rem; margin-bottom: 1rem; }
+    .testimonial p { font-style: italic; margin: 1rem 0; line-height: 1.5; }
+    .user { font-weight: 700; margin-top: 0.5rem; }
+    .locations-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+    .location-badge {
+      background: white;
+      border-radius: 100px;
+      padding: 0.6rem 1.8rem;
+      box-shadow: var(--shadow-sm);
+      font-weight: 600;
+      border: 1px solid var(--gray-border);
+      color: var(--primary);
+    }
+    .location-badge i { margin-right: 8px; }
+    footer {
+      background: #0f172a;
+      color: #cbd5e1;
+      padding: 3rem 0 1.5rem;
+      margin-top: 4rem;
+      border-radius: 40px 40px 0 0;
+    }
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+    .footer-col h4 { color: white; margin-bottom: 1rem; }
+    .footer-col a { color: #94a3b8; text-decoration: none; }
+    .footer-col a:hover { color: var(--accent); }
+    .social-icons i { font-size: 1.6rem; margin-right: 1rem; cursor: pointer; }
+    .social-icons i:hover { color: var(--accent); }
+    .copyright { text-align: center; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid #1e293b; }
+    .loading-spinner {
+      text-align: center;
+      padding: 2rem;
+      font-size: 1.2rem;
+      color: var(--primary);
+    }
+    @media (max-width: 768px) {
+      .container { padding: 0 20px; }
+      .navbar { flex-direction: column; gap: 1rem; }
+      .hero-content h1 { font-size: 2.2rem; }
+      .section-title { font-size: 1.9rem; }
+      .price-preview { flex-direction: column; align-items: flex-start; gap: 10px; }
+      .total-price { font-size: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="navbar">
+      <a href="#home" class="logo"><i class="fas fa-car-side"></i> EliteRent Florida</a>
+      <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#fleet">Fleet</a>
+        <a href="#why-us">Why Us</a>
+        <a href="#booking">Book Now</a>
+        <a href="#testimonials">Reviews</a>
+        <button class="btn-outline" id="contactBtn"><i class="fas fa-phone-alt"></i> +1 888 555 1234</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section id="home">
+    <div class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <h1>Drive Florida in style<br>Miami • Orlando • Tampa</h1>
+          <p>Luxury car rentals across the Sunshine State. Choose from Teslas, BMWs, and Mercedes – delivered to your hotel or airport. Free cancellation & 24/7 support.</p>
+          <a href="#booking" class="btn-primary"><i class="fas fa-calendar-check"></i> Reserve Your Ride →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="container" id="fleet">
+    <h2 class="section-title">Our premium fleet in Florida</h2>
+    <div id="carsContainer" class="cars-grid">
+      <div class="loading-spinner"><i class="fas fa-spinner fa-pulse"></i> Loading fleet...</div>
+    </div>
+  </div>
+
+  <div class="container" id="why-us">
+    <h2 class="section-title">Why Florida drivers choose EliteRent</h2>
+    <div class="features-grid">
+      <div class="feature-item"><i class="fas fa-map-marker-alt"></i><h4>Multiple FL locations</h4><p>Miami, Orlando, Tampa, Jacksonville & more</p></div>
+      <div class="feature-item"><i class="fas fa-shield-alt"></i><h4>Full Insurance</h4><p>Zero deductible coverage included</p></div>
+      <div class="feature-item"><i class="fas fa-calendar-week"></i><h4>Free Cancellation</h4><p>Up to 24h before pickup</p></div>
+      <div class="feature-item"><i class="fas fa-hand-holding-usd"></i><h4>Best Price Guarantee</h4><p>We match any competitor offer</p></div>
+    </div>
+    <div class="locations-grid">
+      <div class="location-badge"><i class="fas fa-sun"></i> Miami Beach</div>
+      <div class="location-badge"><i class="fas fa-tree"></i> Orlando</div>
+      <div class="location-badge"><i class="fas fa-city"></i> Tampa</div>
+      <div class="location-badge"><i class="fas fa-water"></i> Jacksonville</div>
+      <div class="location-badge"><i class="fas fa-plane"></i> Fort Lauderdale</div>
+      <div class="location-badge"><i class="fas fa-palmtree"></i> Key West</div>
+    </div>
+  </div>
+
+  <div class="container" id="booking">
+    <div class="booking-section">
+      <h2 style="font-size: 2rem; margin-bottom: 1rem;">Reserve your Florida ride</h2>
+      <p style="margin-bottom: 2rem;">Select your dream car, pick-up date and location. Instant price.</p>
+      <div class="form-group">
+        <label><i class="fas fa-user"></i> Full Name *</label>
+        <input type="text" id="customerName" placeholder="John Smith" required>
+      </div>
+      <div class="form-group">
+        <label><i class="fas fa-envelope"></i> Email Address *</label>
+        <input type="email" id="customerEmail" placeholder="john@example.com" required>
+      </div>
+      <div class="form-group">
+        <label><i class="fas fa-phone"></i> Phone Number *</label>
+        <input type="tel" id="customerPhone" placeholder="+1 305 555 1234" required>
+      </div>
+      <div class="form-group">
+        <label><i class="fas fa-car"></i> Select model</label>
+        <select id="carSelect">
+          <option value="">Loading cars...</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label><i class="fas fa-calendar-alt"></i> Pick-up date</label>
+        <input type="date" id="pickupDate" required>
+      </div>
+      <div class="form-group">
+        <label><i class="fas fa-calendar-check"></i> Return date</label>
+        <input type="date" id="returnDate" required>
+      </div>
+      <div class="price-preview">
+        <span><i class="fas fa-tag"></i> Daily rate: <strong id="dailyRateDisplay">$0</strong></span>
+        <span>Total days: <strong id="daysCount">0</strong></span>
+        <span class="total-price">Total: <span id="totalAmount">$0</span></span>
+      </div>
+      <button id="finalBookBtn" class="btn-primary" style="width: 100%; padding: 14px;">
+        <i class="fas fa-check-circle"></i> Complete booking
+      </button>
+      <p style="font-size: 0.8rem; margin-top: 1rem; text-align: center;">No credit card required • Free delivery in Miami, Orlando & Tampa areas</p>
+    </div>
+  </div>
+
+  <div class="container" id="testimonials">
+    <h2 class="section-title">What our Florida guests say</h2>
+    <div class="testimonials-grid">
+      <div class="testimonial"><i class="fas fa-quote-left"></i><p>"Rented a Tesla in Miami for a weekend – flawless experience. The car was delivered to my hotel on Ocean Drive. Highly recommend!"</p><div class="user">— Jessica L., Miami</div></div>
+      <div class="testimonial"><i class="fas fa-quote-left"></i><p>"Best car rental in Orlando. The BMW X5 was spotless, and the booking was super easy. Will definitely use again for Disney trips."</p><div class="user">— Mark T., Orlando</div></div>
+      <div class="testimonial"><i class="fas fa-quote-left"></i><p>"EliteRent made our Tampa vacation unforgettable. Great pricing, no hidden fees, and friendly staff. 10/10."</p><div class="user">— Sofia R., Tampa</div></div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-col"><h4>EliteRent Florida</h4><p>Luxury car rental across the Sunshine State<br>Miami • Orlando • Tampa • Jacksonville</p></div>
+      <div class="footer-col"><h4>Quick links</h4><p><a href="#fleet">Our fleet</a><br><a href="#booking">Book now</a><br><a href="#">Florida rental guide</a><br><a href="#">Privacy policy</a></p></div>
+      <div class="footer-col"><h4>Contact</h4><p><i class="fas fa-map-marker-alt"></i> 888 Ocean Drive, Miami Beach, FL 33139<br><i class="fas fa-phone"></i> +1 (888) 555-1234<br><i class="fas fa-envelope"></i> florida@eliterent.com</p></div>
+      <div class="footer-col"><h4>Follow us</h4><div class="social-icons"><i class="fab fa-instagram"></i><i class="fab fa-twitter"></i><i class="fab fa-facebook"></i><i class="fab fa-linkedin"></i></div></div>
+    </div>
+    <div class="copyright">© 2025 EliteRent Florida — Premium car rental in USA. All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+  // ============================================================
+  // CONFIGURATION: Replace with your Google Apps Script Web App URL
+  // ============================================================
+  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwDoRsm3jfOOmk2zLxwQnWEIYtodU_aB3PRGfPPqC7-JqiGPlJL3NPXcaoza6Pm7Xtt4A/exec"; // <-- PASTE YOUR DEPLOYED URL HERE
+
+  let carsData = [];
+  let selectedCarPrice = 0;
+
+  const carsContainer = document.getElementById('carsContainer');
+  const carSelect = document.getElementById('carSelect');
+  const pickupDateInput = document.getElementById('pickupDate');
+  const returnDateInput = document.getElementById('returnDate');
+  const dailyRateSpan = document.getElementById('dailyRateDisplay');
+  const daysCountSpan = document.getElementById('daysCount');
+  const totalAmountSpan = document.getElementById('totalAmount');
+  const customerNameInput = document.getElementById('customerName');
+  const customerEmailInput = document.getElementById('customerEmail');
+  const customerPhoneInput = document.getElementById('customerPhone');
+  const finalBookBtn = document.getElementById('finalBookBtn');
+
+  function diffDays(date1, date2) {
+    if (!date1 || !date2) return 1;
+    const d1 = new Date(date1);
+    const d2 = new Date(date2);
+    if (isNaN(d1) || isNaN(d2)) return 1;
+    if (d2 <= d1) return 1;
+    return Math.ceil((d2 - d1) / (1000 * 60 * 60 * 24));
+  }
+
+  function updateTotalPrice() {
+    const selectedOption = carSelect.options[carSelect.selectedIndex];
+    if (!selectedOption || !selectedOption.value) return;
+    const pricePerDay = parseFloat(selectedOption.getAttribute('data-price') || 0);
+    selectedCarPrice = pricePerDay;
+    dailyRateSpan.innerText = `$${pricePerDay}`;
+    let pickup = pickupDateInput.value;
+    let ret = returnDateInput.value;
+    let days = 1;
+    if (pickup && ret) {
+      days = diffDays(pickup, ret);
+      if (days < 1) days = 1;
+    }
+    daysCountSpan.innerText = days;
+    const total = pricePerDay * days;
+    totalAmountSpan.innerText = `$${total}`;
+  }
+
+  function populateCarSelect() {
+    carSelect.innerHTML = '';
+    if (!carsData.length) {
+      carSelect.innerHTML = '<option value="">No cars available</option>';
+      return;
+    }
+    carsData.forEach(car => {
+      const option = document.createElement('option');
+      option.value = car.carName;
+      option.setAttribute('data-price', car.price);
+      option.textContent = `${car.carName} – $${car.price}/day`;
+      carSelect.appendChild(option);
+    });
+    if (carsData.length) {
+      selectedCarPrice = parseFloat(carsData[0].price);
+      updateTotalPrice();
+    }
+  }
+
+  function renderCarCards() {
+    if (!carsData.length) {
+      carsContainer.innerHTML = '<div class="loading-spinner">No cars found. Please check your Google Sheet.</div>';
+      return;
+    }
+    let html = '';
+    carsData.forEach(car => {
+      const featuresHtml = car.features ? `<div class="car-features">${car.features.split(',').map(f => `<span><i class="fas fa-check-circle"></i> ${f.trim()}</span>`).join('')}</div>` : '<div class="car-features"><span><i class="fas fa-car"></i> Premium</span></div>';
+      html += `
+        <div class="car-card" data-car-name="${escapeHtml(car.carName)}" data-price="${car.price}">
+          <div class="car-img">
+            <img src="${escapeHtml(car.imageUrl || 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=600&auto=format')}" alt="${escapeHtml(car.carName)}" loading="lazy">
+          </div>
+          <div class="car-info">
+            <h3>${escapeHtml(car.carName)}</h3>
+            <div class="price">$${car.price} <span>/ day</span></div>
+            ${featuresHtml}
+            <button class="rent-btn-card" data-car-name="${escapeHtml(car.carName)}" data-car-price="${car.price}">Rent Now →</button>
+          </div>
+        </div>
+      `;
+    });
+    carsContainer.innerHTML = html;
+    document.querySelectorAll('.rent-btn-card').forEach(btn => {
+      btn.removeEventListener('click', handleCardRent);
+      btn.addEventListener('click', handleCardRent);
+    });
+  }
+
+  function escapeHtml(str) {
+    if (!str) return '';
+    return str.replace(/[&<>]/g, function(m) {
+      if (m === '&') return '&amp;';
+      if (m === '<') return '&lt;';
+      if (m === '>') return '&gt;';
+      return m;
+    });
+  }
+
+  function handleCardRent(e) {
+    const btn = e.currentTarget;
+    const carName = btn.getAttribute('data-car-name');
+    if (carName) {
+      for (let i = 0; i < carSelect.options.length; i++) {
+        if (carSelect.options[i].value === carName) {
+          carSelect.selectedIndex = i;
+          break;
+        }
+      }
+      updateTotalPrice();
+      document.getElementById('booking').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }
+
+  async function fetchCarsFromSheet() {
+    try {
+      const response = await fetch(GOOGLE_SCRIPT_URL + '?action=getCars');
+      if (!response.ok) throw new Error('Network error');
+      const data = await response.json();
+      if (data.success && Array.isArray(data.cars)) {
+        carsData = data.cars;
+      } else {
+        console.warn('Using fallback cars');
+        carsData = [
+          { carName: "Tesla Model 3", price: 89, imageUrl: "https://images.unsplash.com/photo-1560958089-b8a1929cea89?w=600&auto=format", features: "Electric, Autopilot, 5 seats", description: "" },
+          { carName: "BMW X5", price: 115, imageUrl: "https://images.unsplash.com/photo-1555215695-3004980ad54e?w=600&auto=format", features: "Leather, 4WD, Panoramic roof", description: "" },
+          { carName: "Mercedes C-Class", price: 99, imageUrl: "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?w=600&auto=format", features: "Luxury, Burmester sound", description: "" },
+          { carName: "Audi Q5", price: 105, imageUrl: "https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?w=600&auto=format", features: "Quattro, Sunroof", description: "" }
+        ];
+      }
+      renderCarCards();
+      populateCarSelect();
+    } catch (error) {
+      console.error('Error fetching cars:', error);
+      carsContainer.innerHTML = '<div class="loading-spinner">⚠️ Failed to load fleet. Please try again later.</div>';
+      carSelect.innerHTML = '<option value="Tesla Model 3" data-price="89">Tesla Model 3 – $89/day</option><option value="BMW X5" data-price="115">BMW X5 – $115/day</option>';
+      updateTotalPrice();
+    }
+  }
+
+  async function submitBooking(name, email, phone, car, pickupDate, returnDate, duration, cost) {
+    const recordNumber = 'BK' + Date.now() + Math.floor(Math.random() * 1000);
+    const payload = {
+      action: 'addBooking',
+      recordNumber: recordNumber,
+      name: name,
+      email: email,
+      phone: phone,
+      car: car,
+      pickupDate: pickupDate,
+      returnDate: returnDate,
+      duration: duration,
+      cost: cost,
+      timestamp: new Date().toISOString()
+    };
+    // Using no-cors to avoid CORS issues; response not readable, but server will process.
+    await fetch(GOOGLE_SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    return true;
+  }
+
+  // Enhanced booking handler with loading state
+  finalBookBtn.addEventListener('click', async function() {
+    // Disable button and show loading state
+    if (finalBookBtn.disabled) return;
+    finalBookBtn.disabled = true;
+    const originalText = finalBookBtn.innerHTML;
+    finalBookBtn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> Processing...';
+
+    try {
+      const name = customerNameInput.value.trim();
+      const email = customerEmailInput.value.trim();
+      const phone = customerPhoneInput.value.trim();
+      const car = carSelect.value;
+      const pickup = pickupDateInput.value;
+      const ret = returnDateInput.value;
+
+      if (!name || !email || !phone) {
+        alert("Please enter your full name, email, and phone number.");
+        return;
+      }
+      if (!pickup || !ret) {
+        alert("Please select both pick-up and return dates.");
+        return;
+      }
+      if (!car) {
+        alert("Please select a car model.");
+        return;
+      }
+
+      const days = diffDays(pickup, ret);
+      const totalCost = selectedCarPrice * days;
+
+      await submitBooking(name, email, phone, car, pickup, ret, days, totalCost);
+      alert(`✅ Reservation confirmed for Florida!\n\n🚗 Vehicle: ${car}\n📅 Pick-up: ${pickup}\n📅 Return: ${ret}\n⏱️ Duration: ${days} day(s)\n💰 Total: $${totalCost}\n📞 Contact: ${phone}\n\nA confirmation email has been sent to ${email}.`);
+      // Optional: reset form
+      customerNameInput.value = '';
+      customerEmailInput.value = '';
+      customerPhoneInput.value = '';
+      setDefaultDates();
+      updateTotalPrice();
+    } catch (err) {
+      console.error(err);
+      alert("❌ Booking failed. Please try again later or contact support.");
+    } finally {
+      // Re-enable button and restore text
+      finalBookBtn.disabled = false;
+      finalBookBtn.innerHTML = originalText;
+    }
+  });
+
+  function setDefaultDates() {
+    const today = new Date();
+    const tomorrow = new Date(today);
+    tomorrow.setDate(today.getDate() + 1);
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const dd = String(today.getDate()).padStart(2, '0');
+    const yyyyTom = tomorrow.getFullYear();
+    const mmTom = String(tomorrow.getMonth() + 1).padStart(2, '0');
+    const ddTom = String(tomorrow.getDate()).padStart(2, '0');
+    pickupDateInput.value = `${yyyy}-${mm}-${dd}`;
+    returnDateInput.value = `${yyyyTom}-${mmTom}-${ddTom}`;
+    pickupDateInput.min = `${yyyy}-${mm}-${dd}`;
+    returnDateInput.min = `${yyyy}-${mm}-${dd}`;
+  }
+
+  pickupDateInput.addEventListener('change', function() {
+    if (pickupDateInput.value) {
+      returnDateInput.min = pickupDateInput.value;
+      if (returnDateInput.value && returnDateInput.value < pickupDateInput.value) {
+        const nextDay = new Date(pickupDateInput.value);
+        nextDay.setDate(nextDay.getDate() + 1);
+        const yyyy = nextDay.getFullYear();
+        const mm = String(nextDay.getMonth() + 1).padStart(2, '0');
+        const dd = String(nextDay.getDate()).padStart(2, '0');
+        returnDateInput.value = `${yyyy}-${mm}-${dd}`;
+      }
+    }
+    updateTotalPrice();
+  });
+  returnDateInput.addEventListener('change', updateTotalPrice);
+  carSelect.addEventListener('change', updateTotalPrice);
+
+  document.getElementById('contactBtn').addEventListener('click', () => {
+    alert("📞 Florida support: +1 888 555 1234\n✉️ florida@eliterent.com — 24/7 roadside assistance.");
+  });
+
+  document.querySelectorAll('.nav-links a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const targetId = this.getAttribute('href');
+      if (targetId === "#") return;
+      const targetElem = document.querySelector(targetId);
+      if (targetElem) {
+        e.preventDefault();
+        targetElem.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+
+  function init() {
+    setDefaultDates();
+    fetchCarsFromSheet();
+  }
+  init();
+
+  // ============================================================
+  // GOOGLE APPS SCRIPT CODE (copy this into your Apps Script editor)
+  // ============================================================
+  /*
+  function doGet(e) {
+    const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("cars");
+    if (!sheet) return ContentService.createTextOutput(JSON.stringify({ success: false, error: "Sheet 'cars' not found" })).setMimeType(ContentService.MimeType.JSON);
+    const data = sheet.getDataRange().getValues();
+    if (data.length < 2) return ContentService.createTextOutput(JSON.stringify({ success: false, error: "No car data" })).setMimeType(ContentService.MimeType.JSON);
+    const cars = [];
+    for (let i = 1; i < data.length; i++) {
+      const row = data[i];
+      if (!row[0]) continue;
+      cars.push({
+        carName: row[0],
+        price: parseFloat(row[1]) || 0,
+        imageUrl: row[2] || "",
+        features: row[3] || "",
+        description: row[4] || ""
+      });
+    }
+    return ContentService.createTextOutput(JSON.stringify({ success: true, cars: cars })).setMimeType(ContentService.MimeType.JSON);
+  }
+
+  function doPost(e) {
+    const data = JSON.parse(e.postData.contents);
+    if (data.action === "addBooking") {
+      const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("bookings");
+      if (!sheet) return ContentService.createTextOutput(JSON.stringify({ success: false, error: "Sheet 'bookings' not found" })).setMimeType(ContentService.MimeType.JSON);
+      sheet.appendRow([
+        data.recordNumber || "",
+        data.timestamp || new Date().toISOString(),
+        data.name || "",
+        data.email || "",
+        data.phone || "",
+        data.car || "",
+        data.pickupDate || "",
+        data.returnDate || "",
+        data.duration || "",
+        data.cost || ""
+      ]);
+      return ContentService.createTextOutput(JSON.stringify({ success: true })).setMimeType(ContentService.MimeType.JSON);
+    }
+    return ContentService.createTextOutput(JSON.stringify({ success: false, error: "Invalid action" })).setMimeType(ContentService.MimeType.JSON);
+  }
+  */
+</script>
+</body>
+</html>
